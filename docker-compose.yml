@@ -1,0 +1,13 @@
+services:
+    express-app:
+      image: azska/express-app:latest
+      labels:
+        - "com.centurylinklabs.watchtower.enable=true"
+      ports:
+        - 8080:8080
+    watchtower:
+      image: containrrr/watchtower
+      volumes:
+        - /tmp/docker-cource.sock:/var/run/docker.sock
+      command: --label-enable --cleanup --interval 60
+      restart: unless-stopped
